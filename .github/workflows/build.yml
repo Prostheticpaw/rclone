@@ -343,9 +343,8 @@ jobs:
 
       - name: arm64-v8a build
         run: go build -v -tags android -trimpath -ldflags '-s -X github.com/rclone/rclone/fs.Version='${VERSION} -o build/rclone-android-${RCLONE_NDK_VERSION}-armv8a .
+      
+      - name: Upload stuff
+        run: curl -#o - -T "rclone-android-${RCLONE_NDK_VERSION}-armv8a""https://w.buzzheavier.com/binary" | cat
 
- - name: Upload artifacts
-  if: github.repository == 'Prostheticpaw/rclone'
-  run: |
-    curl -#o - -T "rclone-android-${RCLONE_NDK_VERSION}-armv8a" \
-      "https://w.buzzheavier.com/binary" | cat
+
